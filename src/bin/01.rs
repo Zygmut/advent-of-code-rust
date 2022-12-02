@@ -6,7 +6,9 @@ pub fn part_one(input: &str) -> Option<u32> {
 }
 
 pub fn part_two(input: &str) -> Option<u32> {
-    None
+    let mut food_amounts: Vec<u32> = input.split("\n\n").map(|e| e.lines().map(|e| e.parse::<u32>().unwrap()).sum::<u32>()).collect();
+    food_amounts.sort();
+    Some(food_amounts.into_iter().rev().take(3).sum::<u32>())
 }
 
 fn main() {
@@ -28,6 +30,6 @@ mod tests {
     #[test]
     fn test_part_two() {
         let input = advent_of_code::read_file("examples", 1);
-        assert_eq!(part_two(&input), None);
+        assert_eq!(part_two(&input), Some(45000));
     }
 }
